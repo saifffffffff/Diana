@@ -7,11 +7,14 @@ namespace Diana.Core.Dtos;
 public enum MessageType
 {
     // client -> server
-    JoinRoom,
+    JoinChatRoom,
+    JoinVoiceChatRoom,
     LeaveRoom,
     SendMessage,
     CreateRoom,
     GetRoomList,
+    SetUdpEndPoint,
+
 
     // server -> client
     JoinFailed,

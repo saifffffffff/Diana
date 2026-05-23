@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Diana.Application\Diana.Application.csproj" />
     <ProjectReference Include="..\Diana.Core\Diana.Core.csproj" />
     <ProjectReference Include="..\Diana.Presenter\Diana.Presenter.csproj" />

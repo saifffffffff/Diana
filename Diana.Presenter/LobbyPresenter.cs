@@ -1,14 +1,16 @@
 ﻿using Diana.Core.Dtos;
 using Diana.Core.Interfaces;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
-
 namespace Diana.Presenter;
+
 
 public class LobbyPresenter
 {
     private readonly ILobbyView _view;
     private readonly IChatService _chatService;
-
+    private readonly IVoiceChatService _voiceChatService; // handle its injection
+    private readonly IAudioCodec _audioCodec; // handle its injection
 
     // If I want to pass data from presenter to view use the view interface methods or properties
     // or you can think about methods as the commands the presenter gives to the view to perform a specific action
@@ -16,13 +18,15 @@ public class LobbyPresenter
 
 
 
-    public LobbyPresenter(ILobbyView view , IChatService chatService)
+    public LobbyPresenter(ILobbyView view , IChatService chatService , IVoiceChatService voiceChatService , IAudioCodec  audioCodec)
     {  
         
         _view = view;
         _chatService = chatService;
         _chatService.Connect("127.0.0.1", 5000);
-        _chatService.OnMessageReceived +=  OnMesssageReceived;
+        _chatService.OnMessageReceived +=  async ( msg ) => await OnMesssageReceived(msg);
+        _audioCodec = audioCodec;
+        _voiceChatService = voiceChatService;
         
         _view.OnJoinRoomPressed += async() => await OnJoinPressed();
         _view.OnFormLoaded += async () => await OnLoaded();
@@ -50,7 +54,7 @@ public class LobbyPresenter
     
     private async Task LoadRoomList()
     {
-        await _chatService.SendAsync(new ClientRequest { Type = MessageType.GetRoomList });    
+        await _chatService.SendAsync(new ClientRequest { MessageType = MessageType.GetRoomList });    
     }
 
     private async Task OnJoinPressed ()
@@ -71,6 +75,7 @@ public class LobbyPresenter
             return;
         }
 
+        
         await _chatService.SendAsync( ClientRequest.JoinRoom(roomKey , username ));
 
 
@@ -86,13 +91,13 @@ public class LobbyPresenter
         await LoadRoomList();
     }
 
-    private void OnMesssageReceived( ServerResponse msg)
+    private async Task OnMesssageReceived( ServerResponse msg)
     {
-        HandleRecievedMessage(msg);
+        await HandleRecievedMessage(msg);
     }
 
     // server -> client
-    private void HandleRecievedMessage (ServerResponse msg )
+    private async Task HandleRecievedMessage (ServerResponse msg )
     {
         switch (msg.Type)
         {
@@ -101,7 +106,7 @@ public class LobbyPresenter
                 break;
 
             case MessageType.JoinSuccess:
-                HandleJoinRoomSuccessMessage(msg);
+                await HandleJoinRoomSuccessMessage(msg);
                 break;
 
             case MessageType.JoinFailed:
@@ -131,9 +136,17 @@ public class LobbyPresenter
         _view.ShowError(msg.Content);
     }
 
-    private void HandleJoinRoomSuccessMessage(ServerResponse msg)
+    private async Task HandleJoinRoomSuccessMessage(ServerResponse msg)
     {
-        _view.NavigateToChatRoom(msg.RoomName, msg.RoomKey , msg.Username , msg.Username , _chatService );
+        // TODO : handle room type
+        //_view.NavigateToChatRoom(msg.RoomName, msg.RoomKey , msg.Username , msg.Username , _chatService );
+
+        
+        // sending endpoint - in case of voice chat room 
+        _voiceChatService.Connect("127.0.0.1", 5000);
+        await _chatService.SendAsync(ClientRequest.SetUdpEndPoint(_voiceChatService.EndPoint));
+        _view.NavigateToVoiceChatRoom(msg.RoomName, msg.RoomKey, msg.Username, _voiceChatService , _audioCodec);
+
     }
 
 

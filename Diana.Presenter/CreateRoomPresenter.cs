@@ -32,7 +32,7 @@ public class CreateRoomPresenter
         _view.RoomKey = _view.RoomKey.Trim();
         _view.RoomName = _view.RoomName.Trim();
 
-        await _chatService.SendAsync(ClientRequest.CreateRoom(_view.RoomKey , _view.RoomName , _view.Username , string.Empty));
+        await _chatService.SendAsync(ClientRequest.CreateRoom(_view.RoomKey , _view.RoomName , _view.Username , string.Empty , Core.RoomType.Voice));
     }
 
     // server -> client

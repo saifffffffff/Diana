@@ -1,30 +1,37 @@
 ﻿using Diana.Core.Dtos;
+using Diana.Core;
+using System.Net.Sockets;
 
 namespace Diana.Server;
+
+
+
 
 class ChatRoom
 {
     public ClientHandler Owner { get; set; }
+    
+    public string Key { get; }
+    public string Name { get; }
+    public RoomType Type { get; }
+    public int MemberCount => _members.Count;
 
-    public readonly string Key;
-    public readonly string Name;
+    private Dictionary< string , ClientHandler> _members { get; } = new ();
 
-    public Dictionary< string , ClientHandler> Members { get; } = new ();
+    public IEnumerable<ClientHandler> Members => _members.Values;
 
-    public ChatRoom(string key , string name , ClientHandler owner ) : this(key , name)
-    {
-        this.Owner = owner;
-    }
-
-    public ChatRoom(string key , string name )
+    public ChatRoom(string key , string name , RoomType type, ClientHandler owner ) 
     {
         this.Key = key;
         this.Name = name;
+        this.Owner = owner;
+        this.Type = type;
     }
 
+    // tcp
     public async Task BroadcastMessageAsync ( ServerResponse msg , string excludeUsername = null)
     {
-        foreach (var member in Members.Values)
+        foreach (var member in _members.Values)
         {
             if (excludeUsername is not null && excludeUsername == member.Username) continue;
 
@@ -33,9 +40,50 @@ class ChatRoom
         
     }
 
-    public bool IsEmpty => Members.Count == 0;
+   
+
+    public bool IsEmpty => _members.Count == 0;
 
     public bool IsOwner(ClientHandler client) => client.Username == Owner.Username; // TODO : make the comparison better because 
 
+    public void AddMember(ClientHandler client)
+    {
+        ArgumentNullException.ThrowIfNull(client);
 
+        _members[client.Username] = client;
+    }
+    
+    public void RemoveMember(string username)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(username);
+
+        _members.Remove(username);
+    }
+
+    public void ChangeOwnerRandomly()
+    {
+        if ( _members.Count <= 1)
+            return;
+        
+        Owner = _members.Values.First( member => member != Owner );
+    
+    }
+
+    public bool MemberExistsBy(Func<ClientHandler, bool> predicate) => _members.Values.Any(predicate);
+
+
+    public async Task VoiceChannelStarted()
+    {
+        var udp = new UdpClient(5000);
+        while (true)
+        {
+            var data = await udp.ReceiveAsync();
+            
+            foreach ( var member in _members.Values)
+            {
+                await udp.SendAsync(data.Buffer, data.Buffer.Length);
+            }
+
+        }
+    }
 }

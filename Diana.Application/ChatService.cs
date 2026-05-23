@@ -65,10 +65,6 @@ public class ChatService : IChatService
             
             }
         }
-        catch  (Exception ex) 
-        {
-            throw ex;
-        }
         finally
         {
             reader.Close();

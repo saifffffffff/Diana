@@ -13,10 +13,12 @@ public partial class LobbyView : Window, ILobbyView
 
     public LobbyView()
     {
+        // for debugging
+        //Thread.Sleep(10000);
         InitializeComponent();
 
-        var chatService = new ChatService();
-        _presenter = new LobbyPresenter(this, chatService);
+        
+        _presenter = new LobbyPresenter(this, DIContainer.chatService, DIContainer.voiceChatService , DIContainer.audioCodec);
 
         JoinButton.Click += (s, e) => OnJoinRoomPressed?.Invoke();
         CreateButton.Click += (s, e) => OnCreateRoomPressed?.Invoke();
@@ -87,6 +89,24 @@ public partial class LobbyView : Window, ILobbyView
         });
     }
 
+    public void NavigateToVoiceChatRoom(string roomName, string roomKey, string username, IVoiceChatService voiceChatService , IAudioCodec audioCodec)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            var window = new TestView(roomName, roomKey, username);
+            var presenter = new VoiceChatRoomPresenter(window , voiceChatService , audioCodec);
+            window.Owner = this;
+            this.Hide();
+            window.Closed += (s, e) => this.Show();
+            window.Show();
+        });
+    }
+
+
+
+
+    
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         OnFormLoaded?.Invoke();
@@ -96,4 +116,5 @@ public partial class LobbyView : Window, ILobbyView
     {
         OnClosed?.Invoke();
     }
+
 }

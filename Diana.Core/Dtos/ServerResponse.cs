@@ -23,11 +23,10 @@ public class ServerResponse
 
     public MessageType Type { get; set; }
 
-    public static ServerResponse UserLeft(string roomKey, string username, string content = null) =>
+    public static ServerResponse UserLeft(string username, string content = null) =>
         new ServerResponse
         {
             Type = MessageType.UserLeft,
-            RoomKey = roomKey,
             Username = username,
             Content = content ?? $"{username} has left the room"
         };
@@ -59,12 +58,10 @@ public class ServerResponse
             RoomOwner = OwnerName
         };
 
-    public static ServerResponse SendingMessageFailed(string roomKey, string username, string content) =>
+    public static ServerResponse SendingMessageFailed( string content) =>
         new ServerResponse
         {
             Type = MessageType.SendingMessageFailed,
-            RoomKey = roomKey,
-            Username = username,
             Content = content
         };
 
