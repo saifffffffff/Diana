@@ -18,6 +18,7 @@ public class ServerResponse
 
     public string RoomOwner { get; private set; }
 
+    public RoomType RoomType { get; set; }
 
     public DateTime TimeStamp { get; set; } = DateTime.Now;
 
@@ -48,14 +49,15 @@ public class ServerResponse
             RoomKey = roomKey
         };
 
-    public static ServerResponse JoinSuccess(string roomKey, string username, string roomName, string OwnerName) =>
+    public static ServerResponse JoinSuccess(string roomKey, string username, string roomName, string OwnerName, RoomType roomType = RoomType.Voice) =>
         new ServerResponse
         {
             Type = MessageType.JoinSuccess,
             RoomKey = roomKey,
             Username = username,
             RoomName = roomName,
-            RoomOwner = OwnerName
+            RoomOwner = OwnerName,
+            RoomType = roomType
         };
 
     public static ServerResponse SendingMessageFailed( string content) =>
@@ -69,5 +71,17 @@ public class ServerResponse
         new ServerResponse { Type = MessageType.RoomCreateFailed, RoomName = roomName, RoomKey = roomKey, Content = content };
 
     public static ServerResponse CreateRoomSuccess(string content) => new ServerResponse { Type = MessageType.RoomCreateSuccess, Content = content };
+
+    public static ServerResponse RoomMemberList(IEnumerable<VoiceChatRoomMember> members)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(members);
+        return new ServerResponse { Type = MessageType.RoomMemberList, Content = json };
+    }
+
+    public static ServerResponse MemberMicToggled(string username, bool isMuted) =>
+        new ServerResponse { Type = MessageType.MemberMicToggled, Username = username, Content = isMuted.ToString() };
+
+    public static ServerResponse MemberSpeakingStatusChanged(string username, bool isSpeaking) =>
+        new ServerResponse { Type = MessageType.MemberSpeakingStatusChanged, Username = username, Content = isSpeaking.ToString() };
 }
 

@@ -71,19 +71,22 @@ class ChatRoom
 
     public bool MemberExistsBy(Func<ClientHandler, bool> predicate) => _members.Values.Any(predicate);
 
-
-    public async Task VoiceChannelStarted()
+    public IEnumerable<VoiceChatRoomMember> GetMembersAsDto()
     {
-        var udp = new UdpClient(5000);
-        while (true)
-        {
-            var data = await udp.ReceiveAsync();
-            
-            foreach ( var member in _members.Values)
-            {
-                await udp.SendAsync(data.Buffer, data.Buffer.Length);
-            }
-
-        }
+        return _members.Values.Select(m => new VoiceChatRoomMember(
+            m.Username,
+            m.ImageBase64 ?? string.Empty,
+            m.IsMuted,
+            m.IsSpeaking
+        ));
     }
+
+    public static IEnumerable<RoomInfo> GetRoomsAsRoomInfo() => Server.ChatRooms.Values.Select(room => new RoomInfo
+    {
+        RoomName = room.Name,
+        RoomKey = room.Key,
+        MemberCount = room.MemberCount,
+        RoomType = room.Type
+    }).ToList();
+
 }

@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\DianaLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Diana.Application\Diana.Application.csproj" />
     <ProjectReference Include="..\Diana.Core\Diana.Core.csproj" />
     <ProjectReference Include="..\Diana.Presenter\Diana.Presenter.csproj" />

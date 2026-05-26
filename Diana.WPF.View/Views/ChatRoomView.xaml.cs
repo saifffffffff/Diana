@@ -77,7 +77,7 @@ public partial class ChatRoomView : Window, IChatRoomView
     }
 
     public void ClearInput() => ExecuteOnUi(() => MessageBox.Text = string.Empty);
-    public void CloseView() => ExecuteOnUi(() => Close());
+    public void CloseView() => this.Close();
 
     // Helper to execute code on UI thread and return default when used in getters
     private void ExecuteOnUi(Action action)
@@ -91,4 +91,31 @@ public partial class ChatRoomView : Window, IChatRoomView
         if (Dispatcher.CheckAccess()) return func();
         return (T)Dispatcher.Invoke(func)!;
     }
+
+    // ──────────── Custom Title Bar ────────────
+
+    private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 1)
+            this.DragMove();
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
+
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = this.WindowState == WindowState.Maximized
+            ? WindowState.Normal
+            : WindowState.Maximized;
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        OnLeavePressed?.Invoke();
+    }
+
+   
 }

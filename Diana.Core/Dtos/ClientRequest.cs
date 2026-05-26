@@ -29,11 +29,11 @@ public class ClientRequest
     public static ClientRequest LeaveRoom(string roomKey, string username) =>
         new ClientRequest { MessageType = MessageType.LeaveRoom, RoomKey = roomKey, Username = username };
 
-    public static ClientRequest JoinRoom(string roomKey, string username) =>
-        new ClientRequest { MessageType = MessageType.JoinChatRoom, RoomKey = roomKey, Username = username };
+    public static ClientRequest JoinRoom(string roomKey, string username, string imageBase64 = null) =>
+        new ClientRequest { MessageType = MessageType.JoinChatRoom, RoomKey = roomKey, Username = username, ImageBase64 = imageBase64 };
     
     public static ClientRequest SendMessage(string roomKey, string username, string content, string imageBase64 = null) =>
-        new ClientRequest { MessageType = MessageType.SendMessage, Username = username, Content = content, RoomKey = roomKey, ImageBase64 = imageBase64 };
+        new ClientRequest { MessageType = MessageType.SendMessage, Username = username, Content = content, RoomKey = roomKey };
 
     public static ClientRequest CreateRoom(string roomKey, string roomName, string username, string content , RoomType roomType) =>
         new ClientRequest { MessageType = MessageType.CreateRoom, Content = content, RoomKey = roomKey, RoomName = roomName, Username = username , RoomType = roomType };
@@ -42,10 +42,17 @@ public class ClientRequest
 
     public static ClientRequest SetUdpEndPoint(IPEndPoint endPoint) {
         
-        
         return new ClientRequest { IpAddress = endPoint.Address.ToString() , port = endPoint.Port , MessageType = MessageType.SetUdpEndPoint};
     }
-   
+
+    public static ClientRequest GetVoiceChatRoomMembers(string roomKey) =>
+        new ClientRequest { MessageType = MessageType.GetVoiceChatRoomMembers, RoomKey = roomKey };
+
+    public static ClientRequest MicToggled(string roomKey, string username, bool isMuted) =>
+        new ClientRequest { MessageType = MessageType.MicToggled, RoomKey = roomKey, Username = username, Content = isMuted.ToString() };
+
+    public static ClientRequest SpeakingStatusChanged(string roomKey, string username, bool isSpeaking) =>
+        new ClientRequest { MessageType = MessageType.SpeakingStatusChanged, RoomKey = roomKey, Username = username, Content = isSpeaking.ToString() };
     
 }
 

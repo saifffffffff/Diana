@@ -10,4 +10,5 @@ public class RoomInfo
     public string RoomName { get; set; }
     public int MemberCount { get; set; }
     public string OwnerName { get; set; }
+    public RoomType RoomType { get; set; }
 }

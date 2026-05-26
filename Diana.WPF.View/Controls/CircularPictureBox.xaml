@@ -4,26 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="80" d:DesignWidth="80"
+             MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave"
              MouseUp="UserControl_MouseUp"
-             Cursor="Hand">
+             Cursor="Hand"
+             RenderOptions.BitmapScalingMode="HighQuality">
     <Grid Background="Transparent">
-        <Ellipse x:Name="PictureEllipse" Stroke="Gray" StrokeThickness="2">
+        <!-- Outer glow ring (visible on hover/selected) -->
+        <Ellipse x:Name="GlowRing" Width="62" Height="62"
+                 Stroke="#6366F1" StrokeThickness="2" Opacity="0"/>
+
+        <!-- Avatar circle -->
+        <Ellipse x:Name="PictureEllipse" Width="58" Height="58"
+                 Stroke="#2D3748" StrokeThickness="1"
+                 RenderOptions.BitmapScalingMode="HighQuality">
             <Ellipse.Fill>
                 <ImageBrush x:Name="PictureImageBrush" Stretch="UniformToFill"/>
             </Ellipse.Fill>
         </Ellipse>
 
-        <!-- Plus icon overlay when no image is set -->
-        <TextBlock x:Name="PlusIcon"
-           Text="+"
-           FontSize="40"
-           Foreground="#A78BFA"
-           FontWeight="Bold"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           TextAlignment="Center"
-           Padding="0"
-           Margin="0,-6,0,0"/>
+        <!-- Initials fallback (shown when no image) -->
+        <Border x:Name="InitialsBorder" Width="58" Height="58" CornerRadius="29"
+                Background="#21283A" BorderThickness="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                IsHitTestVisible="False">
+            <TextBlock x:Name="InitialsText" Text="?"
+                       Foreground="#A78BFA" FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Camera icon overlay (shows on hover) -->
+        <Border x:Name="AvatarOverlay" Width="58" Height="58" CornerRadius="29"
+                Background="#88000000" BorderThickness="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Opacity="0"
+                IsHitTestVisible="False">
+            <TextBlock Text="" FontSize="20"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- Pencil edit badge at bottom-right -->
+        <Border x:Name="EditBadge" Width="22" Height="22" CornerRadius="11"
+                Background="#6366F1" BorderThickness="0"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Margin="0,0,0,2"
+                IsHitTestVisible="False">
+            <TextBlock Text="✏️" FontSize="11"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </UserControl>

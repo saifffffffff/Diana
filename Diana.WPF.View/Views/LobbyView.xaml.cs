@@ -13,8 +13,6 @@ public partial class LobbyView : Window, ILobbyView
 
     public LobbyView()
     {
-        // for debugging
-        //Thread.Sleep(10000);
         InitializeComponent();
 
         
@@ -22,7 +20,6 @@ public partial class LobbyView : Window, ILobbyView
 
         JoinButton.Click += (s, e) => OnJoinRoomPressed?.Invoke();
         CreateButton.Click += (s, e) => OnCreateRoomPressed?.Invoke();
-
         RoomsList.ItemsSource = null;
         RoomsList.Visibility = Visibility.Collapsed;
         EmptyState.Visibility = Visibility.Visible;
@@ -30,8 +27,9 @@ public partial class LobbyView : Window, ILobbyView
 
     public string Username => UsernameBox.Text;
     public string RoomKey => RoomKeyBox.Text;
+    public string ImageBase64 => UserAvatar.ImageBase64;
 
-    public string ImageBase64 => "not implemented yet";
+    
 
     public event Action OnJoinRoomPressed;
     public event Action OnCreateRoomPressed;
@@ -67,7 +65,7 @@ public partial class LobbyView : Window, ILobbyView
         // Ensure UI work runs on the UI thread
         Dispatcher.Invoke(() =>
         {
-            var window = new CreateRoomView(this.Username);
+            var window = new CreateRoomView(this.Username , this.ImageBase64);
             var presenter = new CreateRoomPresenter(window, chatService);
             window.Owner = this;
             window.ShowDialog();
@@ -89,23 +87,18 @@ public partial class LobbyView : Window, ILobbyView
         });
     }
 
-    public void NavigateToVoiceChatRoom(string roomName, string roomKey, string username, IVoiceChatService voiceChatService , IAudioCodec audioCodec)
+    public void NavigateToVoiceChatRoom(string roomName, string roomKey, string username, IChatService chatService, IVoiceChatService voiceChatService, IAudioCodec audioCodec)
     {
         Dispatcher.Invoke(() =>
         {
-            var window = new TestView(roomName, roomKey, username);
-            var presenter = new VoiceChatRoomPresenter(window , voiceChatService , audioCodec);
+            var window = new VoiceChatRoomView(roomName, roomKey, username);
+            var presenter = new VoiceChatRoomPresenter(window, chatService, voiceChatService, audioCodec);
             window.Owner = this;
             this.Hide();
             window.Closed += (s, e) => this.Show();
             window.Show();
         });
     }
-
-
-
-
-    
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
@@ -115,6 +108,31 @@ public partial class LobbyView : Window, ILobbyView
     private void Window_Closed(object sender, System.EventArgs e)
     {
         OnClosed?.Invoke();
+    }
+
+    // ──────────── Custom Title Bar ────────────
+
+    private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 1)
+            this.DragMove();
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
+
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = this.WindowState == WindowState.Maximized
+            ? WindowState.Normal
+            : WindowState.Maximized;
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
     }
 
 }

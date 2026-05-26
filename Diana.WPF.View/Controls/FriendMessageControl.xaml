@@ -73,7 +73,8 @@
                 <!-- Real avatar -->
                 <Ellipse x:Name="AvatarImage"
                          Style="{StaticResource AvatarEllipse}"
-                         Visibility="Collapsed">
+                         Visibility="Collapsed"
+                         RenderOptions.BitmapScalingMode="HighQuality">
 
                     <Ellipse.Fill>
                         <ImageBrush x:Name="AvatarBrush"

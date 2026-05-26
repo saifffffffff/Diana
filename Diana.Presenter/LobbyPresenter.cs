@@ -1,5 +1,6 @@
 ﻿using Diana.Core.Dtos;
 using Diana.Core.Interfaces;
+using Diana.Core;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 namespace Diana.Presenter;
@@ -49,7 +50,6 @@ public class LobbyPresenter
         await LoadRoomList();
         
     }
-
     
     
     private async Task LoadRoomList()
@@ -75,8 +75,7 @@ public class LobbyPresenter
             return;
         }
 
-        
-        await _chatService.SendAsync( ClientRequest.JoinRoom(roomKey , username ));
+        await _chatService.SendAsync( ClientRequest.JoinRoom(roomKey , username , _view.ImageBase64 ));
 
 
     }
@@ -138,14 +137,17 @@ public class LobbyPresenter
 
     private async Task HandleJoinRoomSuccessMessage(ServerResponse msg)
     {
-        // TODO : handle room type
-        //_view.NavigateToChatRoom(msg.RoomName, msg.RoomKey , msg.Username , msg.Username , _chatService );
-
-        
-        // sending endpoint - in case of voice chat room 
-        _voiceChatService.Connect("127.0.0.1", 5000);
-        await _chatService.SendAsync(ClientRequest.SetUdpEndPoint(_voiceChatService.EndPoint));
-        _view.NavigateToVoiceChatRoom(msg.RoomName, msg.RoomKey, msg.Username, _voiceChatService , _audioCodec);
+        if (msg.RoomType == RoomType.Voice)
+        {
+            // sending endpoint - in case of voice chat room 
+            _voiceChatService.Connect("127.0.0.1", 5000);
+            await _chatService.SendAsync(ClientRequest.SetUdpEndPoint(_voiceChatService.EndPoint));
+            _view.NavigateToVoiceChatRoom(msg.RoomName, msg.RoomKey, msg.Username, _chatService, _voiceChatService , _audioCodec);
+        }
+        else
+        {
+            _view.NavigateToChatRoom(msg.RoomName, msg.RoomKey, msg.Username, msg.RoomOwner, _chatService);
+        }
 
     }
 

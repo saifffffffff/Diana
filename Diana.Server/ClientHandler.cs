@@ -13,6 +13,8 @@ class ClientHandler
     public string ImageBase64 { get; private set; }
     public ChatRoom? CurrentRoom { get; private set; }
     public IPEndPoint EndPoint { get; private set; }
+    public bool IsMuted { get; set; }
+    public bool IsSpeaking { get; set; }
 
     private readonly NetworkStream _stream;
     private readonly StreamWriter _writer;
@@ -58,7 +60,7 @@ class ClientHandler
     public async Task SendAsync(ServerResponse message)
     {
 
-        Console.WriteLine("Sending back");
+        Console.WriteLine($"Sending back : {message.Type}" );
 
         if (message is null) return;
 
@@ -78,8 +80,9 @@ class ClientHandler
         {
             CurrentRoom.RemoveMember(this.Username);
             await CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(this.Username, $"{Username} has left the room"));
-
         }
+
+        Server.Clients.Remove(this);
 
         await _writer.DisposeAsync();
 
@@ -89,7 +92,7 @@ class ClientHandler
     public async Task MessageHandlerAsync(ClientRequest msg)
     {
         Console.WriteLine("Message received: " + msg.MessageType);
-
+        
         switch (msg.MessageType)
         {
             case MessageType.JoinChatRoom:
@@ -114,6 +117,18 @@ class ClientHandler
 
             case MessageType.SetUdpEndPoint:
                 await HandleSetUdpEndPointRequestAsync(msg);
+                break;
+
+            case MessageType.GetVoiceChatRoomMembers:
+                await HandleGetVoiceChatRoomMembersRequestAsync(msg);
+                break;
+
+            case MessageType.MicToggled:
+                await HandleMicToggledRequestAsync(msg);
+                break;
+
+            case MessageType.SpeakingStatusChanged:
+                await HandleSpeakingStatusChangedRequestAsync(msg);
                 break;
             default:
                 break;
@@ -140,6 +155,16 @@ class ClientHandler
         Server.ChatRooms[room.Key] = room;
 
         Console.WriteLine("room created");
+
+        var roomsInfo = ChatRoom.GetRoomsAsRoomInfo();
+
+        foreach (var client in Server.Clients.Where(client => client.CurrentRoom is null))
+            await client.SendAsync(new ServerResponse
+            {
+                Type = MessageType.GetRoomList,
+                Content = JsonSerializer.Serialize(roomsInfo)
+            });
+
         await SendAsync(ServerResponse.CreateRoomSuccess("Room created successfully"));
 
 
@@ -163,11 +188,16 @@ class ClientHandler
             {
                 Console.WriteLine("Room {0} is empty and will be removed.", CurrentRoom.Name); // TODO : send a message to all clients that the room is removed to update the UI
                 Server.ChatRooms.TryRemove(CurrentRoom.Key, out _);
+                
+                foreach (var client in Server.Clients)
+                    await client.HandleRoomListRequestAsync();
             }
 
             else
                 await CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(Username));
 
+            IsSpeaking = false;
+            IsMuted = false;
             CurrentRoom = null;
 
         }
@@ -177,7 +207,7 @@ class ClientHandler
     private async Task HandleSendRequestAsync(ClientRequest msg)
     {
         if (CurrentRoom is not null)
-            await CurrentRoom.BroadcastMessageAsync(new ServerResponse { Type = MessageType.SendMessage, Content = msg.Content, RoomKey = msg.RoomKey, Username = msg.Username, ImageBase64 = msg.ImageBase64 });
+            await CurrentRoom.BroadcastMessageAsync(new ServerResponse { Type = MessageType.SendMessage, Content = msg.Content, RoomKey = msg.RoomKey, Username = msg.Username, ImageBase64 = this.ImageBase64 });
 
         else
             await SendAsync(ServerResponse.SendingMessageFailed("This user is not joined any room currentry"));
@@ -219,8 +249,7 @@ class ClientHandler
 
         room.AddMember(this);
 
-        await SendAsync(ServerResponse.JoinSuccess(roomKey, Username, room.Name, room.Owner.Username));
-
+        await SendAsync(ServerResponse.JoinSuccess(roomKey, Username, room.Name, room.Owner.Username, room.Type));
 
         await room.BroadcastMessageAsync(ServerResponse.UserJoined(roomKey, this.Username), excludeUsername: this.Username);
 
@@ -237,18 +266,42 @@ class ClientHandler
     
     private async Task HandleRoomListRequestAsync( )
     {
-        var roomsInfo = Server.ChatRooms.Values.Select(room => new RoomInfo 
-        { 
-            RoomName = room.Name,
-            RoomKey = room.Key,
-            MemberCount = room.MemberCount 
-        }).ToList();
+        var roomsInfo = ChatRoom.GetRoomsAsRoomInfo();
+        
         await SendAsync(
             new ServerResponse {
                 Type = MessageType.GetRoomList,
                 Content = JsonSerializer.Serialize(roomsInfo)
             }
         );
+    }
+
+    private async Task HandleGetVoiceChatRoomMembersRequestAsync(ClientRequest msg)
+    {
+        if (CurrentRoom is null) return;
+
+        var members = CurrentRoom.GetMembersAsDto();
+        await SendAsync(ServerResponse.RoomMemberList(members));
+    }
+
+    private async Task HandleMicToggledRequestAsync(ClientRequest msg)
+    {
+        if (CurrentRoom is null) return;
+
+        bool isMuted = bool.TryParse(msg.Content, out var muted) && muted;
+        IsMuted = isMuted;
+
+        await CurrentRoom.BroadcastMessageAsync(ServerResponse.MemberMicToggled(Username, isMuted));
+    }
+
+    private async Task HandleSpeakingStatusChangedRequestAsync(ClientRequest msg)
+    {
+        if (CurrentRoom is null) return;
+
+        bool isSpeaking = bool.TryParse(msg.Content, out var speaking) && speaking;
+        IsSpeaking = isSpeaking;
+
+        await CurrentRoom.BroadcastMessageAsync(ServerResponse.MemberSpeakingStatusChanged(Username, isSpeaking));
     }
 
     // equality members

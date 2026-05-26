@@ -14,7 +14,7 @@ internal class Server
 
 
     public readonly static ConcurrentDictionary< string , ChatRoom> ChatRooms = new ();
-    
+    public readonly static LinkedList<ClientHandler> Clients = new ();
 
     public async Task RunUdpAsync()
     {
@@ -32,8 +32,8 @@ internal class Server
 
             var room = ChatRooms[msg.RoomKey];
 
-            Console.WriteLine(string.Join( ' ' , msg.VoiceData));
-            //await Task.WhenAll(room.Members.Select<>( member => { if (member.Username != msg.SenderUsername) udp.SendAsync(result.Buffer, result.Buffer.Length, member.EndPoint);  }));
+            //Console.WriteLine(string.Join( ' ' , msg.VoiceData));
+              
 
             foreach (var member in room.Members)
             {
@@ -45,16 +45,6 @@ internal class Server
                     await udp.SendAsync(result.Buffer, result.Buffer.Length, member.EndPoint);
                 }
             }
-
-            //LinkedList<Task<int>> tasks = new ();
-            //foreach ( var member in room.Members)
-            //{
-            //    tasks.AddLast(udp.SendAsync(result.Buffer, result.Buffer.Length, member.EndPoint));
-            //}
-
-            //await Task.WhenAll(tasks);
-
-
 
         }
     }
@@ -68,10 +58,13 @@ internal class Server
 
         while ( true )
         {
+            
             var tcp = await listener.AcceptTcpClientAsync();
             var client = new ClientHandler(tcp);
             
             Console.WriteLine("Client connected.");
+
+            Clients.AddLast(client);
 
             Task.Run(async () => await client.Run());
 

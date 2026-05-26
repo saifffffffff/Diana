@@ -16,9 +16,15 @@ public class CreateRoomPresenter
         _chatService  = chatService;
 
         _view.OnCreatePressed += async () => await OnCreatePressed();
+        _view.OnViewClosed += OnViewClosed;
         _chatService.OnMessageReceived += HandleReceivedMessage;
 
         
+    }
+
+    private void OnViewClosed()
+    {
+        _chatService.OnMessageReceived -= HandleReceivedMessage;
     }
 
     private async Task OnCreatePressed()
@@ -32,7 +38,7 @@ public class CreateRoomPresenter
         _view.RoomKey = _view.RoomKey.Trim();
         _view.RoomName = _view.RoomName.Trim();
 
-        await _chatService.SendAsync(ClientRequest.CreateRoom(_view.RoomKey , _view.RoomName , _view.Username , string.Empty , Core.RoomType.Voice));
+        await _chatService.SendAsync(ClientRequest.CreateRoom(_view.RoomKey , _view.RoomName , _view.Username , string.Empty , _view.SelectedRoomType));
     }
 
     // server -> client
@@ -56,7 +62,7 @@ public class CreateRoomPresenter
 
     private void HandleRoomCreateSuccessMessage(ServerResponse msg)
     {
-        _chatService.SendAsync(ClientRequest.JoinRoom(_view.RoomKey, _view.Username));
+        _chatService.SendAsync(ClientRequest.JoinRoom(_view.RoomKey, _view.Username , _view.ImageBase64));
         _view.IsRoomCreated = true;
         _view.CloseView();
 

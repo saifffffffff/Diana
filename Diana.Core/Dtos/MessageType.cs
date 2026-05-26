@@ -14,6 +14,9 @@ public enum MessageType
     CreateRoom,
     GetRoomList,
     SetUdpEndPoint,
+    GetVoiceChatRoomMembers,
+    MicToggled,
+    SpeakingStatusChanged,
 
 
     // server -> client
@@ -23,5 +26,8 @@ public enum MessageType
     RoomCreateFailed,
     RoomCreateSuccess,
     UserLeft,
-    UserJoined
+    UserJoined,
+    RoomMemberList,
+    MemberMicToggled,
+    MemberSpeakingStatusChanged
 }

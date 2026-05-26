@@ -16,5 +16,5 @@ public interface ILobbyView
     void ShowError(string message);
     void OpenCreateRoomView(string username , IChatService chatService); // returns true is the room is created successfully
     void NavigateToChatRoom(string roomName , string roomKey,  string username , string Owner, IChatService chatService);
-    void NavigateToVoiceChatRoom(string roomName, string roomKey, string username, IVoiceChatService voiceChatService , IAudioCodec audioCodec);
+    void NavigateToVoiceChatRoom(string roomName, string roomKey, string username, IChatService chatService, IVoiceChatService voiceChatService, IAudioCodec audioCodec);
 }
