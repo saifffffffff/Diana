@@ -120,7 +120,7 @@ public class LobbyPresenter
     private void HandleRoomListMessage(ServerResponse msg)
     {
     
-        var rooms = JsonSerializer.Deserialize<List<RoomInfo>>(msg.Content) ?? new ();
+        var rooms = JsonSerializer.Deserialize<List<RoomInfo>>(msg.Content.ToString()) ?? new ();
         
         
         if (rooms.Count == 0) return;
@@ -132,7 +132,7 @@ public class LobbyPresenter
 
     private void HandleJoinRoomFailedMessage ( ServerResponse msg)
     {
-        _view.ShowError(msg.Content);
+        _view.ShowError(msg.Content.ToString());
     }
 
     private async Task HandleJoinRoomSuccessMessage(ServerResponse msg)

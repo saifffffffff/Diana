@@ -64,6 +64,6 @@ public class ChatRoomPresenter
 
     private void HandleSendMessage(ServerResponse message)
     {
-        _view.AppendMessage(message.Username, message.Content, message.ImageBase64);
+        _view.AppendMessage(message.Username, message.Content.ToString(), message.ImageBase64);
     }
 }

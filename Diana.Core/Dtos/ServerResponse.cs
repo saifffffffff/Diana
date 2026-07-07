@@ -6,17 +6,17 @@ namespace Diana.Core.Dtos;
 
 public class ServerResponse
 {
-    public string Content { get; set; }
+    public object? Content { get; set; }
 
-    public string Username { get; set; }
+    public string? Username { get; set; }
 
-    public string RoomKey { get; set; }
+    public string? RoomKey { get; set; }
 
-    public string RoomName { get; set; }
+    public string? RoomName { get; set; }
 
-    public string ImageBase64 { get; set; }
+    public string? ImageBase64 { get; set; }
 
-    public string RoomOwner { get; private set; }
+    public string? RoomOwner { get; private set; }
 
     public RoomType RoomType { get; set; }
 

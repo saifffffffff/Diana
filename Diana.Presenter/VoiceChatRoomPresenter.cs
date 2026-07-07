@@ -114,7 +114,7 @@ public class VoiceChatRoomPresenter
 
     private void HandleRoomMemberList(ServerResponse msg)
     {
-        var members = JsonSerializer.Deserialize<List<VoiceChatRoomMember>>(msg.Content ?? "[]")
+        var members = JsonSerializer.Deserialize<List<VoiceChatRoomMember>>(msg.Content.ToString() ?? "[]")
                        ?? new List<VoiceChatRoomMember>();
         _view.SetMembers(members);
     }

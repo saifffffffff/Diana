@@ -1,26 +1,27 @@
 ﻿using Diana.Core.Dtos;
 using Diana.Core;
 using System.Net.Sockets;
+using Diana.Server.Sessions;
 
-namespace Diana.Server;
+namespace Diana.Server.Rooms;
 
 
 
 
 class ChatRoom
 {
-    public ClientHandler Owner { get; set; }
+    public ClientSessionHandler Owner { get; set; }
     
     public string Key { get; }
     public string Name { get; }
     public RoomType Type { get; }
     public int MemberCount => _members.Count;
 
-    private Dictionary< string , ClientHandler> _members { get; } = new ();
+    private Dictionary< string , ClientSessionHandler> _members { get; } = new ();
 
-    public IEnumerable<ClientHandler> Members => _members.Values;
+    public IEnumerable<ClientSessionHandler> Members => _members.Values;
 
-    public ChatRoom(string key , string name , RoomType type, ClientHandler owner ) 
+    public ChatRoom(string key , string name , RoomType type, ClientSessionHandler owner ) 
     {
         this.Key = key;
         this.Name = name;
@@ -44,9 +45,9 @@ class ChatRoom
 
     public bool IsEmpty => _members.Count == 0;
 
-    public bool IsOwner(ClientHandler client) => client.Username == Owner.Username; // TODO : make the comparison better because 
+    public bool IsOwner(ClientSessionHandler client) => client.Username == Owner.Username; // TODO : make the comparison better because 
 
-    public void AddMember(ClientHandler client)
+    public void AddMember(ClientSessionHandler client)
     {
         ArgumentNullException.ThrowIfNull(client);
 
@@ -69,7 +70,7 @@ class ChatRoom
     
     }
 
-    public bool MemberExistsBy(Func<ClientHandler, bool> predicate) => _members.Values.Any(predicate);
+    public bool MemberExistsBy(Func<ClientSessionHandler, bool> predicate) => _members.Values.Any(predicate);
 
     public IEnumerable<VoiceChatRoomMember> GetMembersAsDto()
     {

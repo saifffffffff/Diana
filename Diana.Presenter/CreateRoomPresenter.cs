@@ -70,7 +70,7 @@ public class CreateRoomPresenter
 
     private void HandleRoomCreateFailedMessage(ServerResponse msg)
     {
-        _view.ShowError(msg.Content);
+        _view.ShowError(msg.Content.ToString());
     }
 
 
