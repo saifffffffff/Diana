@@ -3,44 +3,40 @@
   "WorkspaceRootPath": "C:\\development\\src\\Diana\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|c:\\development\\src\\diana\\diana.presenter\\chatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|solutionrelative:diana.presenter\\chatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|c:\\development\\src\\diana\\diana.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|solutionrelative:diana.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|c:\\development\\src\\diana\\diana.presenter\\lobbypresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|solutionrelative:diana.presenter\\lobbypresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|c:\\development\\src\\diana\\diana.presenter\\createroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B281F7D6-5B5B-E546-8904-E97BDDA49650}|Diana.Presenter\\Diana.Presenter.csproj|solutionrelative:diana.presenter\\createroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\sessions\\clientsessionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\sessions\\clientsessionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|c:\\development\\src\\diana\\diana.client.application\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|solutionrelative:diana.client.application\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\messaging\\messagehandlerfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\messaging\\messagehandlerfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\sessions\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\networking\\tcpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\networking\\tcpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4A6367E9-8A06-F5F1-5F53-F6A9A8E48B46}|Diana.Client.WPF.View\\Diana.Client.WPF.View.csproj|c:\\development\\src\\diana\\diana.client.wpf.view\\views\\lobbyview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A6367E9-8A06-F5F1-5F53-F6A9A8E48B46}|Diana.Client.WPF.View\\Diana.Client.WPF.View.csproj|solutionrelative:diana.client.wpf.view\\views\\lobbyview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\messaging\\handlers\\leaveroomhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\messaging\\handlers\\leaveroomhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|c:\\development\\src\\diana\\diana.client.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|solutionrelative:diana.client.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D6EB01A-9960-C2B1-F743-CDC259C4FAF7}|Diana.Core\\Diana.Core.csproj|c:\\development\\src\\diana\\diana.core\\dtos\\serverresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D6EB01A-9960-C2B1-F743-CDC259C4FAF7}|Diana.Core\\Diana.Core.csproj|solutionrelative:diana.core\\dtos\\serverresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|c:\\development\\src\\diana\\diana.client.application\\voicechatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|solutionrelative:diana.client.application\\voicechatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|c:\\development\\src\\diana\\diana.client.application\\opusaudiocodec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|solutionrelative:diana.client.application\\opusaudiocodec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|c:\\development\\src\\diana\\diana.client.presenter\\lobbypresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|solutionrelative:diana.client.presenter\\lobbypresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D6EB01A-9960-C2B1-F743-CDC259C4FAF7}|Diana.Core\\Diana.Core.csproj|c:\\development\\src\\diana\\diana.core\\abstractions\\sessions\\isession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D6EB01A-9960-C2B1-F743-CDC259C4FAF7}|Diana.Core\\Diana.Core.csproj|solutionrelative:diana.core\\abstractions\\sessions\\isession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +46,129 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.Application\\ChatService.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Application\\ChatService.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.Application\\ChatService.cs",
+              "RelativeToolTip": "Diana.Client.Application\\ChatService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAFQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T17:07:09.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LobbyView.xaml.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.WPF.View\\Views\\LobbyView.xaml.cs",
+              "RelativeDocumentMoniker": "Diana.Client.WPF.View\\Views\\LobbyView.xaml.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.WPF.View\\Views\\LobbyView.xaml.cs",
+              "RelativeToolTip": "Diana.Client.WPF.View\\Views\\LobbyView.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T16:00:58.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LobbyPresenter.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.Presenter\\LobbyPresenter.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Presenter\\LobbyPresenter.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.Presenter\\LobbyPresenter.cs",
+              "RelativeToolTip": "Diana.Client.Presenter\\LobbyPresenter.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAAAJEAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:34:44.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VoiceChatRoomPresenter.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "RelativeToolTip": "Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAASwFoAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:35:16.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OpusAudioCodec.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.Application\\OpusAudioCodec.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Application\\OpusAudioCodec.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.Application\\OpusAudioCodec.cs",
+              "RelativeToolTip": "Diana.Client.Application\\OpusAudioCodec.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:33:00.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VoiceChatService.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Client.Application\\VoiceChatService.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Application\\VoiceChatService.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Client.Application\\VoiceChatService.cs",
+              "RelativeToolTip": "Diana.Client.Application\\VoiceChatService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAEQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:31:15.774Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ISession.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Core\\Abstractions\\Sessions\\ISession.cs",
+              "RelativeDocumentMoniker": "Diana.Core\\Abstractions\\Sessions\\ISession.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Core\\Abstractions\\Sessions\\ISession.cs",
+              "RelativeToolTip": "Diana.Core\\Abstractions\\Sessions\\ISession.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAABUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:19:03.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Sessions\\Session.cs",
+              "RelativeDocumentMoniker": "Diana.Server\\Sessions\\Session.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Sessions\\Session.cs",
+              "RelativeToolTip": "Diana.Server\\Sessions\\Session.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:15:44.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Server.cs",
+              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Server.cs",
+              "RelativeDocumentMoniker": "Diana.Server\\Server.cs",
+              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Server.cs",
+              "RelativeToolTip": "Diana.Server\\Server.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACkAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-21T15:05:45.16Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -63,136 +181,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ChatRoomPresenter.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Presenter\\ChatRoomPresenter.cs",
-              "RelativeDocumentMoniker": "Diana.Presenter\\ChatRoomPresenter.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Presenter\\ChatRoomPresenter.cs",
-              "RelativeToolTip": "Diana.Presenter\\ChatRoomPresenter.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAADgv0IAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T22:21:37.193Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VoiceChatRoomPresenter.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Presenter\\VoiceChatRoomPresenter.cs",
-              "RelativeDocumentMoniker": "Diana.Presenter\\VoiceChatRoomPresenter.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Presenter\\VoiceChatRoomPresenter.cs",
-              "RelativeToolTip": "Diana.Presenter\\VoiceChatRoomPresenter.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAADgv3IAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T22:21:15.657Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LobbyPresenter.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Presenter\\LobbyPresenter.cs",
-              "RelativeDocumentMoniker": "Diana.Presenter\\LobbyPresenter.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Presenter\\LobbyPresenter.cs",
-              "RelativeToolTip": "Diana.Presenter\\LobbyPresenter.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAADgv3oAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T22:20:50.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateRoomPresenter.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Presenter\\CreateRoomPresenter.cs",
-              "RelativeDocumentMoniker": "Diana.Presenter\\CreateRoomPresenter.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Presenter\\CreateRoomPresenter.cs",
-              "RelativeToolTip": "Diana.Presenter\\CreateRoomPresenter.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAADgv0gAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T22:20:25.014Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MessageHandlerFactory.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Messaging\\MessageHandlerFactory.cs",
-              "RelativeDocumentMoniker": "Diana.Server\\Messaging\\MessageHandlerFactory.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Messaging\\MessageHandlerFactory.cs",
-              "RelativeToolTip": "Diana.Server\\Messaging\\MessageHandlerFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T22:18:03Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "TcpService.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\TcpService.cs",
-              "RelativeDocumentMoniker": "Diana.Server\\Networking\\TcpService.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\TcpService.cs",
-              "RelativeToolTip": "Diana.Server\\Networking\\TcpService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAA0AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T21:56:11.01Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "LeaveRoomHandler.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Messaging\\Handlers\\LeaveRoomHandler.cs",
-              "RelativeDocumentMoniker": "Diana.Server\\Messaging\\Handlers\\LeaveRoomHandler.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Messaging\\Handlers\\LeaveRoomHandler.cs",
-              "RelativeToolTip": "Diana.Server\\Messaging\\Handlers\\LeaveRoomHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T21:49:07.897Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ServerResponse.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Core\\Dtos\\ServerResponse.cs",
-              "RelativeDocumentMoniker": "Diana.Core\\Dtos\\ServerResponse.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Core\\Dtos\\ServerResponse.cs",
-              "RelativeToolTip": "Diana.Core\\Dtos\\ServerResponse.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-07T21:36:21.785Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClientSessionHandler.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Sessions\\ClientSessionHandler.cs",
-              "RelativeDocumentMoniker": "Diana.Server\\Sessions\\ClientSessionHandler.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Sessions\\ClientSessionHandler.cs",
-              "RelativeToolTip": "Diana.Server\\Sessions\\ClientSessionHandler.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAADYAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T12:34:50.492Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Server.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Server.cs",
-              "RelativeDocumentMoniker": "Diana.Server\\Server.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Server.cs",
-              "RelativeToolTip": "Diana.Server\\Server.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAEcAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T12:34:42.069Z",
-              "EditorCaption": ""
             }
           ]
         }

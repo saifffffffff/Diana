@@ -1,38 +1,41 @@
-﻿using Diana.Core.Dtos;
+﻿using Diana.Core.Abstractions.Messaging;
+using Diana.Core.Abstractions.Rooms;
+using Diana.Core.Abstractions.Sessions;
+using Diana.Core.Dtos;
 using Diana.Server.Sessions;
+
 namespace Diana.Server.Messaging.Handlers;
 
-class LeaveRoomHandler : IMessageHandler
+class LeaveRoomHandler(IRoomsManager roomManager , IMessageHandlerFactory messageHandlerFactory) : IMessageHandler
 {
-    public async Task HandleMessage(ClientRequest msg  , ClientSessionHandler clientHanlder)
+   
+    public async Task HandleMessageAsync(ClientRequest request, ISession clientHandler)
     {
-        if (clientHanlder.CurrentRoom is not null)
+        
+
+        if (clientHandler!.CurrentRoom is not null)
         {
-
             // is he the owner of this room -> move the owner to random person 
-            if (clientHanlder.CurrentRoom.IsOwner(clientHanlder))
-                clientHanlder.CurrentRoom.ChangeOwnerRandomly();
+            if (clientHandler.CurrentRoom.Owner == clientHandler)
+                clientHandler.CurrentRoom.ChangeOwnerRandomly();
 
+            clientHandler.CurrentRoom.RemoveMember(clientHandler.Username!);
 
-
-            clientHanlder.CurrentRoom.RemoveMember(clientHanlder.Username);
-
-            if (clientHanlder.CurrentRoom.IsEmpty)
+            if (clientHandler.CurrentRoom.IsEmpty)
             {
-                Console.WriteLine("Room {0} is empty and will be removed.", clientHanlder.CurrentRoom.Name); // TODO : send a message to all clients that the room is removed to update the UI
-                Server.ChatRooms.TryRemove(clientHanlder.CurrentRoom.Key, out _);
+                Console.WriteLine("Room {0} is empty and will be removed.", clientHandler.CurrentRoom.Name);
+                roomManager.RemoveRoom(clientHandler.CurrentRoom.Key);
 
+                // TODO : change this with notification service
                 foreach (var client in Server.Clients)
-                    await MessageHandlerFactory.Create(MessageType.GetRoomList).HandleMessage(msg, clientHanlder);
+                    await messageHandlerFactory.Create(MessageType.GetRoomList).HandleMessageAsync(request, client);
             }
-
             else
-                await clientHanlder.CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(clientHanlder.Username));
+                await clientHandler.CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(clientHandler.Username));
 
-            clientHanlder.IsSpeaking = false;
-            clientHanlder.IsMuted = false;
-            clientHanlder.CurrentRoom = null;
-
+            clientHandler.IsSpeaking = false;
+            clientHandler.IsMuted = false;
+            clientHandler.CurrentRoom = null;
         }
     }
 }

@@ -1,27 +1,29 @@
 ﻿using Diana.Core.Dtos;
 using Diana.Core;
 using System.Net.Sockets;
+using Diana.Core.Abstractions.Sessions;
 using Diana.Server.Sessions;
-
+using Diana.Core.Abstractions.Rooms;
+using System.Collections.Concurrent;
 namespace Diana.Server.Rooms;
 
 
 
-
-class ChatRoom
+// make sure this follow single responslibity
+class ChatRoom : IChatRoom
 {
-    public ClientSessionHandler Owner { get; set; }
+    public ISession Owner { get; set; }
     
     public string Key { get; }
     public string Name { get; }
     public RoomType Type { get; }
+    public bool IsEmpty => _members.Count == 0;
     public int MemberCount => _members.Count;
+    readonly Dictionary< string , ISession> _members  = new ();
+    
+    public IEnumerable<ISession> Members => _members.Values;
 
-    private Dictionary< string , ClientSessionHandler> _members { get; } = new ();
-
-    public IEnumerable<ClientSessionHandler> Members => _members.Values;
-
-    public ChatRoom(string key , string name , RoomType type, ClientSessionHandler owner ) 
+    public ChatRoom(string key , string name , RoomType type, ISession owner ) 
     {
         this.Key = key;
         this.Name = name;
@@ -29,8 +31,7 @@ class ChatRoom
         this.Type = type;
     }
 
-    // tcp
-    public async Task BroadcastMessageAsync ( ServerResponse msg , string excludeUsername = null)
+    public async Task BroadcastMessageAsync ( ServerResponse msg , string? excludeUsername = null)
     {
         foreach (var member in _members.Values)
         {
@@ -41,24 +42,19 @@ class ChatRoom
         
     }
 
-   
-
-    public bool IsEmpty => _members.Count == 0;
-
-    public bool IsOwner(ClientSessionHandler client) => client.Username == Owner.Username; // TODO : make the comparison better because 
-
-    public void AddMember(ClientSessionHandler client)
+    public void AddMember(ISession client)
     {
         ArgumentNullException.ThrowIfNull(client);
-
-        _members[client.Username] = client;
+   
+        _members[client.Username!] = client;
     }
     
-    public void RemoveMember(string username)
+    public bool RemoveMember(string username)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(username);
+        if (string.IsNullOrWhiteSpace(username))
+            return false;
 
-        _members.Remove(username);
+        return _members.Remove(username);
     }
 
     public void ChangeOwnerRandomly()
@@ -70,7 +66,7 @@ class ChatRoom
     
     }
 
-    public bool MemberExistsBy(Func<ClientSessionHandler, bool> predicate) => _members.Values.Any(predicate);
+    public bool MemberExistsBy(Func<ISession, bool> predicate) => _members.Values.Any(predicate);
 
     public IEnumerable<VoiceChatRoomMember> GetMembersAsDto()
     {
@@ -82,12 +78,14 @@ class ChatRoom
         ));
     }
 
-    public static IEnumerable<RoomInfo> GetRoomsAsRoomInfo() => Server.ChatRooms.Values.Select(room => new RoomInfo
-    {
-        RoomName = room.Name,
-        RoomKey = room.Key,
-        MemberCount = room.MemberCount,
-        RoomType = room.Type
-    }).ToList();
 
+    
 }
+
+    //public static IEnumerable<RoomInfo> GetRoomsAsRoomInfo() => Server.ChatRooms.Values.Select(room => new RoomInfo
+    //{
+    //    RoomName = room.Name,
+    //    RoomKey = room.Key,
+    //    MemberCount = room.MemberCount,
+    //    RoomType = room.Type
+    //}).ToList();

@@ -1,42 +1,27 @@
-﻿using Diana.Core.Dtos;
+﻿using Diana.Core.Abstractions.Messaging;
+using Diana.Core.Dtos;
 using Diana.Server.Messaging.Handlers;
+using Microsoft.Extensions.DependencyInjection;
 namespace Diana.Server.Messaging;
 
-class MessageHandlerFactory
+class MessageHandlerFactory(IServiceProvider serviceProvider) : IMessageHandlerFactory 
 {
-    public static IMessageHandler Create(MessageType messageType)
+
+
+    public IMessageHandler Create(MessageType messageType)
     {
-        switch (messageType)
+        return messageType switch
         {
-            case MessageType.JoinChatRoom:
-                return new JoinRoomRequestHandler();
-
-            case MessageType.LeaveRoom:
-                return new LeaveRoomHandler();
-
-            case MessageType.SendMessage:
-                return new SendMessageHandler();
-
-            case MessageType.GetRoomList:
-                return new GetRoomListHandler();
-
-            case MessageType.CreateRoom:
-                return new CreateRoomHandler();
-
-            case MessageType.SetUdpEndPoint:
-                return new SetUdpEndPointHandler();
-
-            case MessageType.GetVoiceChatRoomMembers:
-                return new GetVoiceChatRoomMembersHandler();
-
-            case MessageType.MicToggled:
-                return new MicToggledHandler();
-
-            case MessageType.SpeakingStatusChanged:
-                return new SpeakingStatusChangedHandler();
-
-            default:
-                return null;
-        }
+            MessageType.JoinChatRoom => serviceProvider.GetRequiredService<JoinRoomHandler>(),
+            MessageType.LeaveRoom => serviceProvider.GetRequiredService < LeaveRoomHandler>(),
+            MessageType.SendMessage => serviceProvider.GetRequiredService < SendMessageHandler>(),
+            MessageType.GetRoomList => serviceProvider.GetRequiredService < GetRoomListHandler>(),
+            MessageType.CreateRoom => serviceProvider.GetRequiredService < CreateRoomHandler>(),
+            MessageType.SetUdpEndPoint => serviceProvider.GetRequiredService < SetUdpEndPointHandler>(),
+            MessageType.GetVoiceChatRoomMembers => serviceProvider.GetRequiredService < GetVoiceChatRoomMembersHandler>(),
+            MessageType.MicToggled => serviceProvider.GetRequiredService < MicToggledHandler>(),
+            MessageType.SpeakingStatusChanged => serviceProvider.GetRequiredService <SpeakingStatusChangedHandler>(),
+            _ => throw new ArgumentException()
+        };
     }
 }

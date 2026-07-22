@@ -1,30 +1,29 @@
-﻿using Diana.Core.Dtos;
+﻿using Diana.Core.Abstractions.Messaging;
+using Diana.Core.Abstractions.Networking;
+using Diana.Core.Abstractions.Rooms;
+using Diana.Core.Abstractions.Serialization;
+using Diana.Core.Abstractions.Sessions;
+using Diana.Core.Dtos;
+using Diana.Server.Messaging;
+using Diana.Server.Messaging.Handlers;
 using Diana.Server.Networking;
 using Diana.Server.Rooms;
-using Diana.Server.Serialization;
 using Diana.Server.Sessions;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Diana.Server.Serialization;
+
+
 namespace Diana.Server;
 
-internal class Server
+internal class Server(ISerializer serializer , IServiceProvider serviceProvider , IRoomsManager roomManager)
 {
 
     private readonly int port = 5000;
-    private readonly IServiceProvider _serviceProvider;
-    private readonly ISerializer _serializer;
-    public readonly static ConcurrentDictionary<string, ChatRoom> ChatRooms = new();
-    public readonly static LinkedList<ClientSessionHandler> Clients = new();
-
-    public Server(IServiceProvider serviceProvider, ISerializer serializer)
-    {
-        _serviceProvider = serviceProvider;
-        _serializer = serializer;
-    }
+    
+    public readonly static LinkedList<ISession> Clients = new();
+    
 
     public async Task RunUdpAsync()
     {
@@ -35,12 +34,12 @@ internal class Server
         {
             
             var result = await udp.ReceiveAsync();
-            string json = Encoding.UTF8.GetString(result.Buffer);
-            var msg = System.Text.Json.JsonSerializer.Deserialize<VoiceChatMessage>(json);
+            string msgStr = Encoding.UTF8.GetString(result.Buffer);
+            var msg = serializer.Deserialize<VoiceChatMessage>(msgStr);
             
             if (msg is null) continue;
 
-            var room = ChatRooms[msg.RoomKey];
+            var room = roomManager.GetRoomByKey(msg.RoomKey);
 
             //Console.WriteLine(string.Join( ' ' , msg.VoiceData));
               
@@ -48,7 +47,7 @@ internal class Server
             foreach (var member in room.Members)
             {
 
-                //if (member.Username == msg.SenderUsername) continue;
+                if (member.Username == msg.SenderUsername) continue;
 
                 if (member.EndPoint is not null)
                 {
@@ -61,10 +60,9 @@ internal class Server
 
     public async Task RunTcpAsync()
     {
-
+        // recieve connection -> create a client handler 
         var listener = new TcpListener(IPAddress.Any, port);
         listener.Start();
-
 
         while ( true )
         {
@@ -72,10 +70,10 @@ internal class Server
             var tcp = await listener.AcceptTcpClientAsync();
 
             // create a TcpService instance bound to the accepted TcpClient
-            var tcpService = ActivatorUtilities.CreateInstance<Networking.TcpService>(_serviceProvider, tcp);
+            var networkService = ActivatorUtilities.CreateInstance<INetworkService>(serviceProvider, tcp);
 
             // create the client session handler; serializer will be resolved from the service provider
-            var client = ActivatorUtilities.CreateInstance<ClientSessionHandler>(_serviceProvider, tcpService);
+            var client = ActivatorUtilities.CreateInstance<ISession>(serviceProvider, networkService);
 
             Console.WriteLine("Client connected.");
 
@@ -92,16 +90,29 @@ internal class Server
         var serviceCollection = new ServiceCollection();
 
         serviceCollection.AddSingleton<ISerializer, JsonSerializer>();
+        serviceCollection.AddSingleton<IRoomsManager, RoomManager>();
+        serviceCollection.AddSingleton<IMessageHandlerFactory, MessageHandlerFactory>();
+
+        // Register handlers (each can have different dependencies!)
+        serviceCollection.AddSingleton<JoinRoomHandler>();
+        serviceCollection.AddSingleton<LeaveRoomHandler>();
+        serviceCollection.AddSingleton<SendMessageHandler>();
+        serviceCollection.AddSingleton<GetRoomListHandler>();
+        serviceCollection.AddSingleton<CreateRoomHandler>();
+        serviceCollection.AddSingleton<SetUdpEndPointHandler>();
+        serviceCollection.AddSingleton<GetVoiceChatRoomMembersHandler>();
+        serviceCollection.AddSingleton<MicToggledHandler>();
+        serviceCollection.AddSingleton<SpeakingStatusChangedHandler>();
 
         // register per-connection types so they can be created via ActivatorUtilities
-        serviceCollection.AddTransient<ClientSessionHandler>();
-        serviceCollection.AddTransient<Networking.TcpService>();
+        serviceCollection.AddTransient< ISession, Session>();
+        serviceCollection.AddTransient< INetworkService , TcpService>();
+        serviceCollection.AddTransient<IChatRoom, ChatRoom>();
+        serviceCollection.AddTransient<Server>();
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
-
-        var serializer = serviceProvider.GetRequiredService<ISerializer>();
-
-        Server server = new Server(serviceProvider, serializer);
+        
+        Server server = serviceProvider.GetRequiredService<Server>();
 
         await Task.WhenAll(
             server.RunTcpAsync(),

@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using Diana.Core.Abstractions.Networking;
+using System.Net.Sockets;
 using System.Text;
 namespace Diana.Server.Networking;
 

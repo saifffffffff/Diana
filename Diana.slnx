@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="Diana.Application/Diana.Application.csproj" />
+  <Project Path="Diana.Client.Application/Diana.Client.Application.csproj" />
   <Project Path="Diana.Core/Diana.Core.csproj" />
-  <Project Path="Diana.Presenter/Diana.Presenter.csproj" />
+  <Project Path="Diana.Client.Presenter/Diana.Client.Presenter.csproj" />
   <Project Path="Diana.Server/Diana.Server.csproj" />
-  <Project Path="Diana.WPF.View/Diana.WPF.View.csproj" />
+  <Project Path="Diana.Client.WPF.View/Diana.Client.WPF.View.csproj" />
 </Solution>
