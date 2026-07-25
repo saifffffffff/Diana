@@ -11,6 +11,7 @@ public interface IChatRoom
     string Key { get; }
     string Name { get; }
     bool IsEmpty { get; }
+    int MemberCount { get; }
     RoomType Type { get; }
     ISession Owner { get; set; }  
     IEnumerable<ISession> Members { get; }

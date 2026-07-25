@@ -3,16 +3,16 @@ using System.Net.Sockets;
 using System.Text;
 namespace Diana.Server.Networking;
 
-class TcpService : INetworkService 
+class TcpNetworkChannel : INetworkChannel 
 {
     
     private readonly StreamWriter _writer;
     private readonly StreamReader _reader;
-    private readonly TcpClient _tcp;
+    private TcpClient _tcp;
     bool _disposed;
 
 
-    public TcpService (TcpClient tcp )
+    public TcpNetworkChannel (TcpClient tcp )
     {
         _tcp = tcp;
         _writer = new StreamWriter(_tcp.GetStream(), Encoding.UTF8) { AutoFlush = true };
@@ -44,7 +44,12 @@ class TcpService : INetworkService
         GC.SuppressFinalize(this);
     }
 
-    ~TcpService()
+    
+            
+        
+    
+
+    ~TcpNetworkChannel()
     {
         Dispose();
     }

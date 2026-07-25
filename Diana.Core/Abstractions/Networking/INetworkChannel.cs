@@ -2,10 +2,12 @@
 
 // networking technology 
 
-public interface INetworkService : IDisposable
+public interface INetworkChannel : IDisposable
 {
     Task SendAsync(string message);
 
     Task<string?> RecieveAsync();
+
+   
 }
 

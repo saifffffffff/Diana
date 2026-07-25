@@ -9,7 +9,7 @@ namespace Diana.Client.Presenter;
 
 public class LobbyPresenter
 {
-    private readonly ILobbyView _view;
+    private ILobbyView _view;
     private readonly IChatService _chatService;
     private readonly IVoiceChatService _voiceChatService; // handle its injection
     private readonly IAudioCodec _audioCodec; // handle its injection
@@ -20,23 +20,33 @@ public class LobbyPresenter
 
 
 
-    public LobbyPresenter(ILobbyView view , IChatService chatService , IVoiceChatService voiceChatService , IAudioCodec  audioCodec)
-    {  
-        
-        _view = view;
+    public LobbyPresenter(IChatService chatService, IVoiceChatService voiceChatService, IAudioCodec audioCodec)
+    {
+
+
         _chatService = chatService;
-        _chatService.Connect("127.0.0.1", 5000);
-        _chatService.OnMessageReceived +=  async ( msg ) => await OnMesssageReceived(msg);
-        _audioCodec = audioCodec;
         _voiceChatService = voiceChatService;
-        
-        _view.OnJoinRoomPressed += async() => await OnJoinPressed();
-        _view.OnFormLoaded += async () => await OnLoaded();
-        _view.OnCreateRoomPressed += async () => await OnCreateRoomPressed() ;
-        _view.OnClosed += OnClosed;
-        
+        _audioCodec = audioCodec;
+
+        _chatService.OnMessageReceived += async (msg) => await OnMesssageReceived(msg);
+        _chatService.Connect("127.0.0.1", 5000);
+
+
     }
 
+    public void AttachView(ILobbyView view)
+    {
+
+        ArgumentNullException.ThrowIfNull(view);
+
+        _view = view;
+        
+        _view.OnJoinRoomPressed += async () => await OnJoinPressed();
+        _view.OnFormLoaded += async () => await OnLoaded();
+        _view.OnCreateRoomPressed += async () => await OnCreateRoomPressed();
+        _view.OnClosed += OnClosed;
+    }
+    
     private async Task OnCreateRoomPressed()
     {
 
@@ -51,7 +61,6 @@ public class LobbyPresenter
         await LoadRoomList();
         
     }
-    
     
     private async Task LoadRoomList()
     {
@@ -91,14 +100,17 @@ public class LobbyPresenter
         await LoadRoomList();
     }
 
+
+    // server -> client
     private async Task OnMesssageReceived( ServerResponse msg)
     {
         await HandleRecievedMessage(msg);
     }
-
-    // server -> client
+    
     private async Task HandleRecievedMessage (ServerResponse msg )
     {
+        
+
         switch (msg.Type)
         {
             case MessageType.GetRoomList:

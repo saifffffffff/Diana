@@ -16,7 +16,7 @@ class GetRoomListHandler (IRoomsManager roomManager ) : IMessageHandler
             new ServerResponse
             {
                 Type = MessageType.GetRoomList,
-                Content = roomManager.Rooms
+                Content = roomManager.Rooms.Select  ( room => new RoomInfo { RoomName = room.Name , OwnerName = room.Owner.Username , RoomKey = room.Key , RoomType = room.Type , MemberCount = room.MemberCount})
             }
         );
     }

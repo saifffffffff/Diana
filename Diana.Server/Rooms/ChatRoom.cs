@@ -78,6 +78,10 @@ class ChatRoom : IChatRoom
         ));
     }
 
+    public override string ToString()
+    {
+        return $"Room Name : {Name} - Room Key : {Key} - member count : {_members.Values.Count}" ;
+    }
 
     
 }

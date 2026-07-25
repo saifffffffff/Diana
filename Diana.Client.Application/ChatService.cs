@@ -45,7 +45,7 @@ public class ChatService : IChatService
 
     public void Disconnect()
     {
-        if (!IsConnected) return;
+        //if (!IsConnected) return;
         _tcp.Dispose();
     }
 

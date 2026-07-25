@@ -13,8 +13,7 @@ class RoomManager : IRoomsManager
 {
     IServiceProvider _serviceProvider;
     Dictionary<string, IChatRoom> _rooms = new();
-    public IEnumerable<IChatRoom> Rooms { get; }
-
+    public IEnumerable<IChatRoom> Rooms { get => _rooms.Values; }
 
     public RoomManager(IServiceProvider serviceProvider)
     {
@@ -37,10 +36,10 @@ class RoomManager : IRoomsManager
 
         if (_rooms.ContainsKey(roomKey))
             return (false, "Room key already exists");
-            
 
-        var createdRoom = ActivatorUtilities.CreateInstance<ChatRoom>(_serviceProvider, roomKey , roomName , roomType , roomOwner);
-
+        // TODO : make a room Factory
+        //var createdRoom = ActivatorUtilities.CreateInstance<ChatRoom>(_serviceProvider, roomKey , roomName , roomType , roomOwner);
+        var createdRoom = new ChatRoom(roomKey, roomName, roomType, roomOwner);
         _rooms.Add(roomKey, createdRoom);
 
         return (true, null ); 

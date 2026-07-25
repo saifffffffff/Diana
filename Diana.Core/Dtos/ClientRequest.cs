@@ -53,6 +53,26 @@ public class ClientRequest
 
     public static ClientRequest SpeakingStatusChanged(string roomKey, string username, bool isSpeaking) =>
         new ClientRequest { MessageType = MessageType.SpeakingStatusChanged, RoomKey = roomKey, Username = username, Content = isSpeaking.ToString() };
+
     
+    public override string ToString()
+    {
+        // Truncate ImageBase64 to keep the log output clean and readable
+        string imageDisplay = string.IsNullOrEmpty(ImageBase64)
+            ? "null"
+            : $"[Base64 String, Length: {ImageBase64.Length}]";
+
+        return $"Message [" +
+               $"Type: {MessageType}, " +
+               $"Username: '{Username ?? "null"}', " +
+               $"Content: '{Content ?? "null"}', " +
+               $"RoomName: '{RoomName ?? "null"}', " +
+               $"RoomKey: '{RoomKey ?? "null"}', " +
+               $"RoomType: {RoomType}, " +
+               $"IP: {IpAddress ?? "null"}:{port}, " +
+               $"Image: {imageDisplay}" +
+               $"]";
+    }
 }
+
 

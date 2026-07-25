@@ -63,10 +63,7 @@ public class VoiceChatService : IVoiceChatService
                 if (data == null) 
                     break;
 
-                string json = Encoding.UTF8.GetString(data);
-                var msg = JsonSerializer.Deserialize<VoiceChatMessage>(json);
-
-                OnVoiceDataRecieved?.Invoke(msg.VoiceData);
+                OnVoiceDataRecieved?.Invoke(data);
 
             }
         }

@@ -46,6 +46,7 @@ public class CreateRoomPresenter
     private void HandleReceivedMessage ( ServerResponse msg )
     {
 
+        
         switch (msg.Type)
         {
         

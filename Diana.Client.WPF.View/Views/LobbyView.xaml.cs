@@ -12,12 +12,13 @@ public partial class LobbyView : Window, ILobbyView
 {
     private LobbyPresenter _presenter;
 
-    public LobbyView()
+    public LobbyView( LobbyPresenter presenter)
     {
         InitializeComponent();
 
-        
-        _presenter = new LobbyPresenter(this, DIContainer.chatService, DIContainer.voiceChatService , DIContainer.audioCodec);
+
+        _presenter = presenter;
+        _presenter.AttachView(this);
 
         JoinButton.Click += (s, e) => OnJoinRoomPressed?.Invoke();
         CreateButton.Click += (s, e) => OnCreateRoomPressed?.Invoke();
@@ -29,8 +30,6 @@ public partial class LobbyView : Window, ILobbyView
     public string Username => UsernameBox.Text;
     public string RoomKey => RoomKeyBox.Text;
     public string ImageBase64 => UserAvatar.ImageBase64;
-
-    
 
     public event Action OnJoinRoomPressed;
     public event Action OnCreateRoomPressed;

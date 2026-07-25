@@ -10,32 +10,35 @@ class CreateRoomHandler(IRoomsManager roomManager) : IMessageHandler
 {
 
     
-    public async Task HandleMessageAsync(ClientRequest request, ISession clientHandler  )
+    public async Task HandleMessageAsync(ClientRequest request, ISession session  )
     {
-        
 
+        Console.WriteLine("From create room" );
         // TODO : Add Notifier 
-        (bool result , string? error ) = roomManager.CreateRoom(request.RoomKey, request.RoomName, request.RoomType, clientHandler);
+
+        (bool result , string? error ) = roomManager.CreateRoom(request.RoomKey, request.RoomName, request.RoomType, session);
 
         if ( result)
         {
-            var roomsInfo = roomManager.Rooms;
 
-            foreach (var client in Server.Clients.Where(client => client.CurrentRoom is null))
-                await client.SendAsync(new ServerResponse
-                {
-                    Type = MessageType.GetRoomList,
-                    Content = System.Text.Json.JsonSerializer.Serialize(roomsInfo)
-                });
+            
+            //var roomsInfo = roomManager.Rooms;
+            //foreach (var client in Server.Clients.Where(client => client.CurrentRoom is null))
+            //    await client.SendAsync(new ServerResponse
+            //    {
+            //        Type = MessageType.GetRoomList,
+            //        Content = System.Text.Json.JsonSerializer.Serialize(roomsInfo)
+            //    });
 
-            await clientHandler.SendAsync(ServerResponse.CreateRoomSuccess("Room created successfully"));
+            await session.SendAsync(ServerResponse.CreateRoomSuccess("Room created successfully"));
         
             Console.WriteLine("room created");
         }
 
         else
         {
-            await clientHandler.SendAsync(ServerResponse.CreateRoomFailed(request.RoomKey, request.RoomName, request.Username, error));
+            Console.WriteLine("Room not created");
+            await session.SendAsync(ServerResponse.CreateRoomFailed(request.RoomKey, request.RoomName, request.Username, error));
         }
 
 

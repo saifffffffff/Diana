@@ -27,8 +27,8 @@ class LeaveRoomHandler(IRoomsManager roomManager , IMessageHandlerFactory messag
                 roomManager.RemoveRoom(clientHandler.CurrentRoom.Key);
 
                 // TODO : change this with notification service
-                foreach (var client in Server.Clients)
-                    await messageHandlerFactory.Create(MessageType.GetRoomList).HandleMessageAsync(request, client);
+                //foreach (var client in Server.Clients)
+                //    await messageHandlerFactory.Create(MessageType.GetRoomList).HandleMessageAsync(request, client);
             }
             else
                 await clientHandler.CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(clientHandler.Username));

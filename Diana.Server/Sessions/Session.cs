@@ -14,7 +14,7 @@ namespace Diana.Server.Sessions;
 
 // TODO : Solve encapsulation issue : private setters + setters methods
 // managing the lifecycle of one connected client's session
-class Session(INetworkService networkService, ISerializer serializer, IMessageHandlerFactory messageHandlersFactory) : ISession
+class Session(INetworkChannel networkService, ISerializer serializer, IMessageHandlerFactory messageHandlersFactory) : ISession
 {
     public string? Username { get; set; }
     public string? ImageBase64 { get; set; }
@@ -36,13 +36,14 @@ class Session(INetworkService networkService, ISerializer serializer, IMessageHa
         {
             while ((line = await networkService.RecieveAsync()) != null)
             {
-                Console.WriteLine("Line recieved");
                 
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
-                var msg = serializer.Deserialize<ClientRequest>(line);
+                var request = serializer.Deserialize<ClientRequest>(line);
+                
+                Console.WriteLine("request received: " + request);
 
-                await HandleRequestAsync(msg!);
+                await HandleRequestAsync(request!);
 
             }
         }
@@ -58,16 +59,23 @@ class Session(INetworkService networkService, ISerializer serializer, IMessageHa
     }
 
     // Send
-    public async Task SendAsync(ServerResponse message)
+    public async Task SendAsync(ServerResponse response)
     {
 
-        Console.WriteLine($"Sending back : {message.Type}" );
+        Console.WriteLine($"Sending response : {response.Type}\n" );
 
-        if (message is null) return;
+        if (response is null) return;
+        
+        try
+        {
+            var json = serializer.Serialize(response);
 
-        var json = serializer.Serialize(message);
-
-        await networkService.SendAsync(json);
+            await networkService.SendAsync(json);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
 
     }
 
@@ -79,7 +87,6 @@ class Session(INetworkService networkService, ISerializer serializer, IMessageHa
 
         await messageHandler.HandleMessageAsync(request, this);
        
-        Console.WriteLine("Message received: " + request.MessageType);
         
         
     }
@@ -133,10 +140,8 @@ class Session(INetworkService networkService, ISerializer serializer, IMessageHa
             await CurrentRoom.BroadcastMessageAsync(ServerResponse.UserLeft(this.Username, $"{Username} has left the room"));
         }
 
-        Server.Clients.Remove(this);
-
-
     }
+
     public async ValueTask DisposeAsync()
     {
         if (_disposed)
