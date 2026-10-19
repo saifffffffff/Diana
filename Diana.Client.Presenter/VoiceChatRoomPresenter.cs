@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using Diana.Core.Abstractions.Views;
 using Diana.Core.Abstractions.Services;
+using System.Diagnostics;
 
 namespace Diana.Client.Presenter;
 
@@ -91,6 +92,7 @@ public class VoiceChatRoomPresenter
     void OnDataRecieved(byte[] encodedVoiceBytes)
     {
         byte[] decodedBytes = _audioCodec.Decode(encodedVoiceBytes);
+        Debug.WriteLine(string.Join(" " , decodedBytes));
         _view.VoiceDataRecieved(decodedBytes);
     }
 

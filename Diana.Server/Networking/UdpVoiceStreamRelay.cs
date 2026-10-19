@@ -28,7 +28,7 @@ class UdpVoiceStreamRelay(ISerializer serializer, IRoomsManager roomManager) : I
 
             var room = roomManager.GetRoomByKey(msg.RoomKey);
 
-            //Console.WriteLine(string.Join( ' ' , msg.VoiceData));
+            Console.WriteLine(string.Join( ' ' , msg.VoiceData));
 
 
             foreach (var member in room.Members)

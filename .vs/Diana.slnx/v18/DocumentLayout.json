@@ -1,18 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\development\\src\\Diana\\",
+  "WorkspaceRootPath": "C:\\Projects\\Diana\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|c:\\projects\\diana\\diana.client.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27725BBE-5CE7-5AEC-38AF-49B5A5048F82}|Diana.Client.Presenter\\Diana.Client.Presenter.csproj|solutionrelative:diana.client.presenter\\voicechatroompresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\networking\\tcpconnectionacceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\projects\\diana\\diana.server\\networking\\udpvoicestreamrelay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\networking\\udpvoicestreamrelay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|c:\\projects\\diana\\diana.client.application\\voicechatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C1C8E80-372A-22D2-A9DE-57A8B6D2CACA}|Diana.Client.Application\\Diana.Client.Application.csproj|solutionrelative:diana.client.application\\voicechatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\projects\\diana\\diana.server\\networking\\tcpconnectionacceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\networking\\tcpconnectionacceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\development\\src\\diana\\diana.server\\networking\\udpvoicestreamrelay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\networking\\udpvoicestreamrelay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|c:\\projects\\diana\\diana.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{799475DE-ACA5-92AA-43FF-1CC5E9D689F3}|Diana.Server\\Diana.Server.csproj|solutionrelative:diana.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,64 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VoiceChatService.cs",
+              "DocumentMoniker": "C:\\Projects\\Diana\\Diana.Client.Application\\VoiceChatService.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Application\\VoiceChatService.cs",
+              "ToolTip": "C:\\Projects\\Diana\\Diana.Client.Application\\VoiceChatService.cs",
+              "RelativeToolTip": "Diana.Client.Application\\VoiceChatService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T20:53:21.666Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "VoiceChatRoomPresenter.cs",
+              "DocumentMoniker": "C:\\Projects\\Diana\\Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "RelativeDocumentMoniker": "Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "ToolTip": "C:\\Projects\\Diana\\Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "RelativeToolTip": "Diana.Client.Presenter\\VoiceChatRoomPresenter.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAqwFAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T20:50:56.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "TcpConnectionAcceptor.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
+              "DocumentMoniker": "C:\\Projects\\Diana\\Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
               "RelativeDocumentMoniker": "Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
+              "ToolTip": "C:\\Projects\\Diana\\Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
               "RelativeToolTip": "Diana.Server\\Networking\\TcpConnectionAcceptor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-25T17:09:20.403Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "UdpVoiceStreamRelay.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
+              "DocumentMoniker": "C:\\Projects\\Diana\\Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
               "RelativeDocumentMoniker": "Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
+              "ToolTip": "C:\\Projects\\Diana\\Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
               "RelativeToolTip": "Diana.Server\\Networking\\UdpVoiceStreamRelay.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-25T17:09:19.296Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\development\\src\\Diana\\Diana.Server\\Program.cs",
+              "DocumentMoniker": "C:\\Projects\\Diana\\Diana.Server\\Program.cs",
               "RelativeDocumentMoniker": "Diana.Server\\Program.cs",
-              "ToolTip": "C:\\development\\src\\Diana\\Diana.Server\\Program.cs",
+              "ToolTip": "C:\\Projects\\Diana\\Diana.Server\\Program.cs",
               "RelativeToolTip": "Diana.Server\\Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADgAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-25T16:56:39.082Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2026-07-25T16:56:39.082Z"
             }
           ]
         }
